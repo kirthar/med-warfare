@@ -1,0 +1,17 @@
+h1 Listing combats
+
+table
+  tr
+    th
+    th
+    th
+
+  - @combats.each do |combat|
+    tr
+      td = link_to 'Show', combat
+      td = link_to 'Edit', edit_combat_path(combat)
+      td = link_to 'Destroy', combat, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Combat', new_combat_path

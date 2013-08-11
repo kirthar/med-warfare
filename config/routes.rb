@@ -1,4 +1,10 @@
 MedWarfare::Application.routes.draw do
+  resources :combats
+
+
+  resources :actions
+
+
   get "home/index"
   root :to => 'home#index'
   devise_for :users

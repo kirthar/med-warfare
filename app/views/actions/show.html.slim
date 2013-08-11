@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Unit:
+  = @action.unit
+p
+  strong Target:
+  = @action.target
+p
+  strong Action:
+  = @action.action
+
+= link_to 'Edit', edit_action_path(@action)
+'|
+= link_to 'Back', actions_path
