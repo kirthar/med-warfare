@@ -8,4 +8,21 @@ class Unit < ActiveRecord::Base
     unit_images.first.image
   end
 
+
+  def basic_attack(target)
+    do_damage(target, 10)
+  end
+
+  def magic_attack(target)
+    do_damage(target, 20)
+  end
+
+  def defense
+    defending = true
+  end
+
+  def do_damage_to(target, amount)
+
+  end
+
 end
