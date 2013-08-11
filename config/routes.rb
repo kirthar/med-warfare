@@ -3,6 +3,8 @@ MedWarfare::Application.routes.draw do
   root :to => 'home#index'
   devise_for :users
 
+  resources :units
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

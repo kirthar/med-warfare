@@ -7,6 +7,10 @@ gem 'slim-rails'
 gem 'jquery-rails'
 gem 'quiet_assets'
 
+# Resources management
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Database
 gem 'mysql2'
 
