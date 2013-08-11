@@ -1,0 +1,39 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title= content_for?(:title) ? yield(:title) : APP_CONFIG['title']
+    = csrf_meta_tags
+
+    = stylesheet_link_tag "application", :media => "all"
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag
+    = javascript_include_tag "application"
+
+
+  body
+    = render 'shared/navbar'
+    .container-fluid
+
+      .row-fluid
+        .span3
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header Sidebar
+              li= link_to "Link 1", "/path1"
+              li= link_to "Link 2", "/path2"
+              li= link_to "Link 3", "/path3"
+        .span9
+          = bootstrap_flash
+          = yield
+    
+      footer
+        p
+          =' APP_CONFIG['year']
+          ' &copy;
+          = APP_CONFIG['author']

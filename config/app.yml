@@ -1,0 +1,12 @@
+development:
+  title: Medieval Warfare
+  author: Chris Fuertes
+  year: 2013
+  contact_email: chris.fuertes@gmail.com
+  mail:
+    account:
+      user_name:
+      password:
+    smtp:
+      address: localhost
+      port: 1025
