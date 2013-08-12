@@ -7,6 +7,10 @@ gem 'slim-rails'
 gem 'jquery-rails'
 gem 'quiet_assets'
 
+# Resources management
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Database
 gem 'mysql2'
 
@@ -33,6 +37,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'debugger'
+  gem 'rails-footnotes'
 end
 
 # Deploy with Capistrano

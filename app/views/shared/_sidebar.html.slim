@@ -1,0 +1,10 @@
+.well.sidebar-nav
+  ul.nav.nav-list
+    li.nav-header Units
+    li= link_to 'All', units_path
+    - Unit::CLASSES.each do |name_class|
+      li= link_to name_class, units_path(by_type: name_class)
+
+    li.nav-header Combats
+    - Combat.all.each do |combat|
+      li= link_to "Combat #{combat.id}", combat

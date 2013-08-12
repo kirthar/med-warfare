@@ -8,9 +8,8 @@
       a.brand href="#"=APP_CONFIG['title']
       .container-fluid.nav-collapse
         ul.nav
-          li= link_to "Link 1", "/path1"
-          li= link_to "Link 2", "/path2"
-          li= link_to "Link 3", "/path3"
+          li= link_to "Units", units_path
+          li= link_to "Combats", combats_path
         ul.nav.pull-right
           li.dropdown
             - if user_signed_in?

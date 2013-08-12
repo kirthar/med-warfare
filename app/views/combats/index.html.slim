@@ -1,0 +1,21 @@
+- model_class = Combat
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+table class="table table-striped"
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.combat_actions', :default => t("helpers.combat_actions")
+  tbody
+    - @combats.each do |combat|
+      tr
+        td= link_to combat.id, combat_path(combat)
+        td=l combat.created_at
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_combat_path(combat), :class => 'btn btn-mini'
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), combat_path(combat), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_combat_path, :class => 'btn btn-primary'
+

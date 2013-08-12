@@ -1,0 +1,20 @@
+- model_class = CombatAction
+table class="table table-striped"
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:unit_id)
+      th= model_class.human_attribute_name(:target_id)
+      th= model_class.human_attribute_name(:combat_id)
+      th= model_class.human_attribute_name(:action)
+      th= model_class.human_attribute_name(:created_at)
+  tbody
+    - combat_actions.each do |action|
+      tr
+        td= link_to action.id, combat_action_path(action)
+        td= action.unit.name
+        td= action.target.name
+        td= action.combat_id
+        td= action.action
+        td=l action.created_at
+= link_to t('.new', :default => t("helpers.links.new")), new_combat_action_path, :class => 'btn btn-primary'

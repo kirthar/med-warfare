@@ -11,7 +11,47 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811095950) do
+ActiveRecord::Schema.define(:version => 20130811175306) do
+
+  create_table "combat_actions", :force => true do |t|
+    t.integer  "unit_id"
+    t.integer  "target_id"
+    t.integer  "combat_id"
+    t.string   "action"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "combat_actions", ["combat_id"], :name => "index_combat_actions_on_combat_id"
+  add_index "combat_actions", ["target_id"], :name => "index_combat_actions_on_target_id"
+  add_index "combat_actions", ["unit_id"], :name => "index_combat_actions_on_unit_id"
+
+  create_table "combats", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "unit_images", :force => true do |t|
+    t.string   "image"
+    t.integer  "unit_id"
+    t.integer  "order"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+  add_index "unit_images", ["unit_id"], :name => "index_unit_images_on_unit_id"
+
+  create_table "units", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "type"
+    t.integer  "level"
+    t.integer  "experience"
+    t.integer  "max_health"
+    t.integer  "current_health"
+    t.string   "status"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
