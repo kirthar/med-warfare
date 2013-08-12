@@ -17,14 +17,5 @@ html lang="en"
 
 
   body
-    = render 'layouts/shared/navbar'
-    .container-fluid
-
-      .row-fluid
-        .span3
-          = render 'layouts/shared/sidebar'
-        .span9
-          = bootstrap_flash
-          = yield
-    
+    = yield
     = render 'layouts/shared/footer'
