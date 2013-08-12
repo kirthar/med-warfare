@@ -21,12 +21,17 @@ ActiveRecord::Schema.define(:version => 20130811124632) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "units", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "type"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table 'units', :force => true do |t|
+    t.string  'name'
+    t.string  'description'
+    t.string  'type'
+    t.integer 'level'
+    t.integer 'experience'
+    t.integer 'max_health'
+    t.integer 'current_health'
+    t.string  'status'
+    t.datetime 'created_at',  :null => false
+    t.datetime 'updated_at',  :null => false
   end
 
   create_table "users", :force => true do |t|

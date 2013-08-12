@@ -6,6 +6,6 @@ class Priest < Unit
   end
 
   def heal(target)
-    do_damage(target, -1 * BASIC_DMG)
+    do_damage_to(target, BASIC_DMG, DMG_TYPE_HEAL)
   end
 end

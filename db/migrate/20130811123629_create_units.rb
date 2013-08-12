@@ -4,7 +4,11 @@ class CreateUnits < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :type
-
+      t.integer :level
+      t.integer :experience
+      t.integer :max_health
+      t.integer :current_health
+      t.string :status
       t.timestamps
     end
   end
