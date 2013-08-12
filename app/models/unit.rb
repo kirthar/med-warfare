@@ -25,6 +25,8 @@ class Unit < ActiveRecord::Base
   has_many :unit_images, :dependent => :destroy
   accepts_nested_attributes_for :unit_images
 
+  scope :by_type, lambda {|name| where(type: name) }
+
   def default_image
     unit_images.first.image if unit_images.any?
   end

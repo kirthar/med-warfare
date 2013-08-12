@@ -1,6 +1,12 @@
 class UnitsController < ApplicationController
   load_resource
 
+  def index
+    if type = params[:by_type] and Unit::CLASSES.include?(type.capitalize)
+      @units = Unit.by_type(type.capitalize)
+    end
+  end
+
   def create
     if @unit.save
       if params[:unit_images].present?
