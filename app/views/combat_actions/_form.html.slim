@@ -1,0 +1,18 @@
+= form_for @combat_action, :html => { :class => "form-horizontal" } do |f|
+  = f.hidden_field :combat_id, value: Combat.last.id
+  .control-group
+    = f.label :unit_id, :class => 'control-label'
+    .controls
+      = f.select :unit_id, Unit.all.map{ |u| [u.name, u.id] }, :class => 'select_field'
+  .control-group
+    = f.label :target_id, :class => 'control-label'
+    .controls
+      = f.select :target_id, Unit.all.map{ |u| [u.name, u.id] }, :class => 'select_field'
+  .control-group
+    = f.label :action, :class => 'control-label'
+    .controls
+      = f.select :action, CombatAction::ACTIONS, :class => 'select_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), combat_actions_path, :class => 'btn'

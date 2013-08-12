@@ -5,17 +5,19 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:name)
       th= model_class.human_attribute_name(:image)
+      th= model_class.human_attribute_name(:name)
+      th= model_class.human_attribute_name(:type)
       th= model_class.human_attribute_name(:description)
       th= model_class.human_attribute_name(:created_at)
-      th=t '.actions', :default => t("helpers.actions")
+      th=t '.combat_actions', :default => t("helpers.combat_actions")
   tbody
     - @units.each do |unit|
       tr
         td= link_to unit.id, unit_path(unit)
-        td= unit.name
         td= unit.default_image.present? ? image_tag(unit.default_image.mini.url) : 'no image'
+        td= unit.name
+        td= unit.type
         td= unit.description
         td=l unit.created_at
         td

@@ -1,15 +1,12 @@
 MedWarfare::Application.routes.draw do
-  resources :combats
-
-
-  resources :actions
-
 
   get "home/index"
   root :to => 'home#index'
   devise_for :users
 
   resources :units
+  resources :combats
+  resources :combat_actions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -22,7 +19,7 @@ MedWarfare::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  # Sample resource route (maps HTTP verbs to controller combat_actions automatically):
   #   resources :products
 
   # Sample resource route with options:
@@ -65,6 +62,6 @@ MedWarfare::Application.routes.draw do
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # Note: This route will make all combat_actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end

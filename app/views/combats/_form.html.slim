@@ -1,9 +1,5 @@
-= form_for @combat do |f|
-  - if @combat.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@combat.errors.count, "error")} prohibited this combat from being saved:"
-      ul
-        - @combat.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit 'Save'
+= form_for @combat, :html => { :class => "form-horizontal" } do |f|
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), combats_path, :class => 'btn'

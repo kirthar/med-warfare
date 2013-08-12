@@ -15,7 +15,7 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:current_sign_in_ip)
       th= model_class.human_attribute_name(:last_sign_in_ip)
       th= model_class.human_attribute_name(:created_at)
-      th=t '.actions', :default => t("helpers.actions")
+      th=t '.combat_actions', :default => t("helpers.combat_actions")
   tbody
     - @users.each do |user|
       tr

@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130811175306) do
 
-  create_table "actions", :force => true do |t|
+  create_table "combat_actions", :force => true do |t|
     t.integer  "unit_id"
     t.integer  "target_id"
     t.integer  "combat_id"
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20130811175306) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "actions", ["combat_id"], :name => "index_actions_on_combat_id"
-  add_index "actions", ["target_id"], :name => "index_actions_on_target_id"
-  add_index "actions", ["unit_id"], :name => "index_actions_on_unit_id"
+  add_index "combat_actions", ["combat_id"], :name => "index_combat_actions_on_combat_id"
+  add_index "combat_actions", ["target_id"], :name => "index_combat_actions_on_target_id"
+  add_index "combat_actions", ["unit_id"], :name => "index_combat_actions_on_unit_id"
 
   create_table "combats", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20130811175306) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+  add_index "unit_images", ["unit_id"], :name => "index_unit_images_on_unit_id"
 
   create_table "units", :force => true do |t|
     t.string   "name"

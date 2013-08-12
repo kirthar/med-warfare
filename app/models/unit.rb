@@ -37,7 +37,7 @@ class Unit < ActiveRecord::Base
 
   def basic_attack(target)
     do_damage_to(target, BASE_DMG, default_dmg_type)
-    Action.create(unit: self, target: target, action: Action::BASIC_ATT)
+    CombatAction.create(unit: self, target: target, action: CombatAction::BASIC_ATT)
   end
 
   def magic_attack(target)

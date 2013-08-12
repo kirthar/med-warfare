@@ -1,3 +1,3 @@
 class Combat < ActiveRecord::Base
-  has_many :actions
+  has_many :combat_actions
 end
