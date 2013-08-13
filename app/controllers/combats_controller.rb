@@ -1,6 +1,10 @@
 class CombatsController < ApplicationController
   load_resource
 
+  def index
+    render layout: 'sidebar'
+  end
+
   def show
     @combat_actions = @combat.combat_actions
   end
