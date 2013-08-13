@@ -9,7 +9,9 @@ class CreateUnits < ActiveRecord::Migration
       t.integer :max_health
       t.integer :current_health
       t.string :status
+      t.references :user
       t.timestamps
     end
+    add_index :units, :unit_id
   end
 end

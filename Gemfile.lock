@@ -46,6 +46,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    callsite (0.0.11)
     cancan (1.6.10)
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
@@ -91,14 +92,25 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.11.8.17)
+    localtunnel (0.3)
+      json (>= 1.2.4)
+      net-ssh (>= 2.0.22)
+      net-ssh-gateway (>= 1.0.1)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_request (0.2.8)
+      callsite
+      rack-contrib
+      railties
     mime-types (1.23)
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
     multi_json (1.7.8)
     mysql2 (0.3.13)
+    net-ssh (2.6.8)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
@@ -106,6 +118,8 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-contrib (1.1.0)
+      rack (>= 0.9.1)
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -184,6 +198,8 @@ DEPENDENCIES
   devise
   jquery-rails
   less-rails
+  localtunnel
+  meta_request
   mini_magick
   mysql2
   quiet_assets

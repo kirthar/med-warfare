@@ -1,3 +1,12 @@
+- content_for :sidebar do
+  .well.sidebar-nav
+    ul.nav.nav-list
+      li.nav-header Units
+      li= link_to 'All', units_path
+      - Unit::CLASSES.each do |name_class|
+        li= link_to name_class, units_path(by_type: name_class)
+
+
 - model_class = Unit
 div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.pluralize.titleize

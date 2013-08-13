@@ -1,5 +1,5 @@
 class Unit < ActiveRecord::Base
-  attr_accessible :description, :name, :type, :unit_images_attributes
+  attr_accessible :description, :name, :type, :unit_images_attributes, :user
 
   CLASSES = %w{Archer Mage Rogue Knight Priest}
 
@@ -22,6 +22,7 @@ class Unit < ActiveRecord::Base
   DMG_TYPE_EARTH = 40
   DMG_TYPE_WIND  = 50
 
+  belongs_to :user
   has_many :unit_images, :dependent => :destroy
   accepts_nested_attributes_for :unit_images
 

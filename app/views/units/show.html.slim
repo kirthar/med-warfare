@@ -10,7 +10,11 @@ p
 p
   strong= model_class.human_attribute_name(:image) + ':'
   br
-  = @unit.default_image.present? ? image_tag(@unit.default_image.standard.url) : 'no image'
+  ul.unstyled.inline
+    - @unit.unit_images.each do |unit_image|
+      li
+        = image_tag unit_image.image.standard.url
+        = link_to t('.destroy', :default => t("helpers.links.destroy")), unit_image_path(unit_image), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-block btn-danger'
 p
   strong= model_class.human_attribute_name(:description) + ':'
   br
