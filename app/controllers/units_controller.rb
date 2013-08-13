@@ -1,5 +1,5 @@
 class UnitsController < ApplicationController
-  load_resource
+  load_and_authorize_resource
 
   def index
     @units = current_user.units

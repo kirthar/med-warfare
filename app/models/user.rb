@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :units
+  has_many :user_combats
+  has_many :combats, :through => :user_combats
 end

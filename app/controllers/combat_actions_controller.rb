@@ -1,5 +1,5 @@
 class CombatActionsController < ApplicationController
-  load_resource
+  load_and_authorize_resource
 
   def create
     if @combat_action.save
