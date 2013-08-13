@@ -22,4 +22,9 @@ class CombatActionsController < ApplicationController
     redirect_to combat_actions_path
   end
 
+  def show
+    @combat = @combat_action.combat
+    render layout: 'sidebar'
+  end
+
 end

@@ -1,3 +1,10 @@
+- content_for :sidebar do
+  .well.sidebar-nav
+    ul.nav.nav-list
+      li.nav-header Combat
+      - @combat.combat_actions.each do |combat_action|
+        li= link_to "#{combat_action.unit.name} -> #{combat_action.target.name}: #{combat_action.action}", combat_action
+
 - model_class = CombatAction
 div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.titleize
