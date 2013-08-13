@@ -5,6 +5,7 @@ MedWarfare::Application.routes.draw do
   devise_for :users
 
   resources :units
+  resources :unit_images, only: :destroy
   resources :combats
   resources :combat_actions
 
