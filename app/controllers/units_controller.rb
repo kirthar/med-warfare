@@ -21,9 +21,18 @@ class UnitsController < ApplicationController
 
   def update
     if @unit.update_attributes(params[:unit])
+      if params[:unit_images].present?
+        UnitImage.create(image: params[:unit_images][:image], unit: @unit)
+      end
       redirect_to unit_path(@unit)
     else
       redirect_to edit_unit_path(@unit)
     end
   end
+
+  def destroy
+    @unit.destroy
+    redirect_to combat_actions_path
+  end
+
 end

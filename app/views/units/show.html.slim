@@ -10,7 +10,8 @@ p
 p
   strong= model_class.human_attribute_name(:image) + ':'
   br
-  = @unit.default_image.present? ? image_tag(@unit.default_image.standard.url) : 'no image'
+  - @unit.unit_images.each do |unit_image|
+    = image_tag unit_image.image.standard.url
 p
   strong= model_class.human_attribute_name(:description) + ':'
   br

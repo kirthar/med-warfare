@@ -3,8 +3,8 @@ class ImageUploader < BaseUploader
   process :quality => 100
 
   version :mini do
-    process :set_width => 35
-    end
+    process :set_height => 35
+  end
 
   version :small do
     process :set_width => 120
