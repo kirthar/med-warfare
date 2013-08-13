@@ -2,13 +2,19 @@ class UnitsController < ApplicationController
   load_resource
 
   def index
+    @units = current_user.units
     if type = params[:by_type] and Unit::CLASSES.include?(type.capitalize)
-      @units = Unit.by_type(type.capitalize)
+      @units = @units.by_type(type.capitalize)
     end
     render layout: 'sidebar'
   end
 
+  def new
+    @unit = Unit.new(user: current_user)
+  end
+
   def create
+    @unit.user = current_user
     if @unit.save
       if params[:unit_images].present?
         UnitImage.create(image: params[:unit_images][:image], unit: @unit)
