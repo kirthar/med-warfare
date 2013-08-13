@@ -38,6 +38,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'debugger'
   gem 'rails-footnotes'
+  gem 'localtunnel'
 end
 
 # Deploy with Capistrano
