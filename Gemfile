@@ -39,6 +39,7 @@ group :development do
   gem 'debugger'
   gem 'rails-footnotes'
   gem 'localtunnel'
+  gem 'meta_request'
 end
 
 # Deploy with Capistrano
