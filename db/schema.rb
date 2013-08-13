@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811175306) do
+ActiveRecord::Schema.define(:version => 20130813213314) do
 
   create_table "combat_actions", :force => true do |t|
     t.integer  "unit_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20130811175306) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
   add_index "unit_images", ["unit_id"], :name => "index_unit_images_on_unit_id"
 
   create_table "units", :force => true do |t|
@@ -53,7 +54,18 @@ ActiveRecord::Schema.define(:version => 20130811175306) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
   add_index "units", ["user_id"], :name => "index_units_on_user_id"
+
+  create_table "user_combats", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "combat_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_combats", ["combat_id"], :name => "index_user_combats_on_combat_id"
+  add_index "user_combats", ["user_id"], :name => "index_user_combats_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

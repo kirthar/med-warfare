@@ -1,5 +1,5 @@
 class UnitImagesController < ApplicationController
-  load_resource
+  load_and_authorize_resource
 
   def destroy
     @unit_image.destroy

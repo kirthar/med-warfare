@@ -1,5 +1,5 @@
 class CombatsController < ApplicationController
-  load_resource
+  load_and_authorize_resource
 
   def index
     render layout: 'sidebar'
@@ -14,6 +14,7 @@ class CombatsController < ApplicationController
 
     respond_to do |format|
       if @combat.save
+        UserCombat.create(user: current_user, combat: @combat)
         format.html { redirect_to @combat, notice: 'Combat was successfully created.' }
         format.json { render json: @combat, status: :created, location: @combat }
       else
