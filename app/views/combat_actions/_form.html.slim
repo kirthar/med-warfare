@@ -11,7 +11,11 @@
   .control-group
     = f.label :action, :class => 'control-label'
     .controls
-      = f.select :action, CombatAction::ACTIONS, :class => 'select_field'
+      - if @combat_action.unit.present?
+        = f.select :action, @combat_action.unit.skills, :class => 'select_field'
+      - else
+        = f.select :action, Unit.new.skills, :class => 'select_field'
+
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '
