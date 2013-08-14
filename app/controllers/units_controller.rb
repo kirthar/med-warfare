@@ -41,4 +41,7 @@ class UnitsController < ApplicationController
     redirect_to combat_actions_path
   end
 
+  def skillset
+    render json: @unit.skills
+  end
 end
