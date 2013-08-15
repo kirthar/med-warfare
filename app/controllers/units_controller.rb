@@ -44,4 +44,13 @@ class UnitsController < ApplicationController
   def skillset
     render json: @unit.skills
   end
+
+  def use_skill
+    target = Unit.find(params[:target])
+    combat = Combat.find(params[:combat_id])
+    skill = params[:skill]
+    @unit.use_skill(skill, target)
+    CombatAction.create(unit: @unit, target: target, action: skill, combat: combat)
+    redirect_to :back
+  end
 end
