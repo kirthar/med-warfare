@@ -4,7 +4,9 @@ MedWarfare::Application.routes.draw do
   root :to => 'home#index'
   devise_for :users
 
-  resources :units
+  resources :units do
+    get :skillset, on: :member
+  end
   resources :unit_images, only: :destroy
   resources :combats
   resources :combat_actions
