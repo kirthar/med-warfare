@@ -50,6 +50,10 @@ class Unit < ActiveRecord::Base
     current_health <= 0
   end
 
+  def alive?
+    not dead?
+  end
+
   def do_damage_to(target, amount, dmg_type=DMG_TYPE_SLASHING)
     case dmg_type
       when DMG_TYPE_HEAL

@@ -6,12 +6,13 @@ ul.unstyled.inline
     li
       .btn-group
         - if unit.dead?
-          .btn.disabled
-            =' unit.name
-            | &#9760;
+          .btn.disabled #{unit.name} &#9760;
         - else
           a.btn.dropdown-toggle data-toggle="dropdown" href="#"
             =' unit.name
+            | (
+            =' unit.current_health
+            | )
             span.caret
           ul.dropdown-menu
             - unit.skills.each do |skill|
