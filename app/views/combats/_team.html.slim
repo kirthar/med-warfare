@@ -14,15 +14,4 @@ ul.unstyled.inline
             =' unit.current_health
             | )
             span.caret
-          ul.dropdown-menu
-            - unit.skills.each do |skill|
-              li.dropdown-submenu
-                a(href="#")=skill
-                ul.dropdown-menu
-                  - @combat.units.each do |target|
-                    - if target.dead?
-                      li.disabled
-                        a #{target.name} &#9760;
-                    - else
-                      li
-                        = link_to target.name, use_skill_combat_unit_path(combat_id: combat.id, id: unit.id, skill: skill, target: target), method: :post
+          = render 'skills', combat: combat, unit: unit

@@ -1,0 +1,13 @@
+ul.dropdown-menu
+  - unit.skills.each do |skill|
+    li.dropdown-submenu
+      a(href="#")=skill
+      ul.dropdown-menu
+        - @combat.units.each do |target|
+          - if unit.can_target_skill?(skill, target)
+            li
+              = link_to target.name, use_skill_combat_unit_path(combat_id: combat.id, id: unit.id, skill: skill, target: target), method: :post
+          - else
+            - icon = target.dead? ? '&#9760;' : ''
+            li.disabled
+              a #{target.name} #{raw(icon)}

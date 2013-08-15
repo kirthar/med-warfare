@@ -3,8 +3,6 @@ class Unit < ActiveRecord::Base
 
   CLASSES = %w{Archer Mage Rogue Knight Priest}
 
-  ACTIONS_CLASS = 'unit'
-
   EXP_PER_KILL = 0.1
 
   BASE_DMG = 10
@@ -18,11 +16,13 @@ class Unit < ActiveRecord::Base
   DMG_TYPE_CRUSHING = 3
 
   # Magic
-  DMG_TYPE_HEAL  = 10
+  DMG_TYPE_MAGIC = 10
   DMG_TYPE_FIRE  = 20
   DMG_TYPE_ICE   = 30
   DMG_TYPE_EARTH = 40
   DMG_TYPE_WIND  = 50
+
+  DMG_TYPE_HEAL  = 100
 
   belongs_to :user
   has_many :unit_images, :dependent => :destroy
@@ -39,11 +39,26 @@ class Unit < ActiveRecord::Base
   end
 
   def use_skill(skill, target)
-    action_class.send skill, self, target
+    skill.classify.constantize.skill(self, target)
+  end
+
+  def can_target_skill?(skill_name, target)
+    skill = skill_name.classify.constantize
+
+    return skill.can_target_self? if target == self
+
+    valid = true
+    valid = valid &&  if user.units.include?(target)
+                        skill.friendly_fire?
+                      else
+                        skill.enemy_fire?
+                      end
+
+    valid && skill.valid_target?(target)
   end
 
   def skills
-    action_class.methods - Object.methods
+    ['basic_attack', 'defend']
   end
 
   def dead?
@@ -81,8 +96,4 @@ class Unit < ActiveRecord::Base
       (dmg_type / 10) == DMG_TYPE_PHYSICAL
     end
 
-  private
-    def action_class
-      "unit_actions::#{self.class::ACTIONS_CLASS.camelize}_actions".classify.constantize
-    end
 end

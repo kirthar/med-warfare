@@ -4,4 +4,9 @@ class Knight < Unit
   def default_dmg_type
     DMG_TYPE_CRUSHING
   end
+
+  def skills
+    super + []
+  end
+
 end

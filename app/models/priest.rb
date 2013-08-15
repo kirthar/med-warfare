@@ -1,6 +1,8 @@
 class Priest < Unit
   attr_accessible :description, :image, :name
 
-  ACTIONS_CLASS = 'priest'
+  def skills
+    super + ['heal', 'resurrect']
+  end
 
 end
