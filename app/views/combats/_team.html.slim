@@ -5,14 +5,23 @@ ul.unstyled.inline
   - user.units.each do |unit|
     li
       .btn-group
-        a.btn.dropdown-toggle data-toggle="dropdown" href="#"
-          =' unit.name
-          span.caret
-        ul.dropdown-menu
-          - unit.skills.each do |skill|
-            li.dropdown-submenu
-              a(href="#")=skill
-              ul.dropdown-menu
-                - @combat.units.each do |target|
-                  li
-                    = link_to target.name, use_skill_combat_unit_path(combat_id: combat.id, id: unit.id, skill: skill, target: target), method: :post
+        - if unit.dead?
+          .btn.disabled
+            =' unit.name
+            | &#9760;
+        - else
+          a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+            =' unit.name
+            span.caret
+          ul.dropdown-menu
+            - unit.skills.each do |skill|
+              li.dropdown-submenu
+                a(href="#")=skill
+                ul.dropdown-menu
+                  - @combat.units.each do |target|
+                    - if target.dead?
+                      li.disabled
+                        a #{target.name} &#9760;
+                    - else
+                      li
+                        = link_to target.name, use_skill_combat_unit_path(combat_id: combat.id, id: unit.id, skill: skill, target: target), method: :post
