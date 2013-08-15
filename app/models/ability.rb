@@ -5,7 +5,7 @@ class Ability
     can [:new, :create], User
     if user.present?
       can :manage, User, id: user.id
-      can [:new, :create], Unit
+      can [:new, :create, :use_skill], Unit
       can [:new, :create], Combat
       can [:new, :create, :show], CombatAction
       can :manage, Unit, id: user.units.pluck(:id)

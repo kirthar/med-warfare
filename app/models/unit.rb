@@ -3,6 +3,8 @@ class Unit < ActiveRecord::Base
 
   CLASSES = %w{Archer Mage Rogue Knight Priest}
 
+  ACTIONS_CLASS = 'unit'
+
   EXP_PER_KILL = 0.1
 
   BASE_DMG = 10
@@ -36,39 +38,35 @@ class Unit < ActiveRecord::Base
     DMG_TYPE_SLASHING
   end
 
-  def basic_attack(target)
-    do_damage_to(target, BASE_DMG, default_dmg_type)
-    CombatAction.create(unit: self, target: target, action: CombatAction::BASIC_ATT)
+  def use_skill(skill, target)
+    action_class.send skill, self, target
   end
 
-  def magic_attack(target)
-    do_damage(target, MAGIC_DMG)
-  end
-
-  def defense
-    defending = true
+  def skills
+    action_class.methods - Object.methods
   end
 
   def dead?
     current_health <= 0
   end
 
-  protected
-    def do_damage_to(target, amount, dmg_type=DMG_TYPE_SLASHING)
-      case dmg_type
-        when DMG_TYPE_HEAL
-          amount = -1 * amount
-      end
-
-      target.receive_damage(amount)
-
-      if target.dead?
-        earn_experience(target.experience * EXP_PER_KILL)
-      end
+  def do_damage_to(target, amount, dmg_type=DMG_TYPE_SLASHING)
+    case dmg_type
+      when DMG_TYPE_HEAL
+        amount = -1 * amount
     end
 
+    target.receive_damage(amount)
+
+    if target.dead?
+      earn_experience(target.experience * EXP_PER_KILL)
+    end
+  end
+
+  protected
+
     def receive_damage(amount)
-      update_attribute(:current_health, current_healt - amount)
+      update_attribute(:current_health, current_health - amount)
     end
 
     def earn_experience(amount)
@@ -79,4 +77,8 @@ class Unit < ActiveRecord::Base
       (dmg_type / 10) == DMG_TYPE_PHYSICAL
     end
 
+  private
+    def action_class
+      "unit_actions::#{self.class::ACTIONS_CLASS.camelize}_actions".classify.constantize
+    end
 end

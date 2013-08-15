@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(:version => 20130813213314) do
     t.string   "name"
     t.string   "description"
     t.string   "type"
-    t.integer  "level"
-    t.integer  "experience"
-    t.integer  "max_health"
-    t.integer  "current_health"
+    t.integer  "level", default: 1
+    t.integer  "experience", default: 0
+    t.integer  "max_health", default: 10
+    t.integer  "current_health", default: 10
     t.string   "status"
     t.string   "user_id"
     t.datetime "created_at",     :null => false
