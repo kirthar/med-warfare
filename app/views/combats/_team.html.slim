@@ -1,6 +1,6 @@
 h2
   ' Team #{user.email}
-  = link_to 'Leave combat', leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-danger', method: :delete
+  = link_to 'Leave combat', leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-danger', method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
 ul.unstyled.inline
   - user.units.each do |unit|
     li

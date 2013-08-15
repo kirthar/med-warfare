@@ -5,11 +5,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
 
   has_many :units
   has_many :user_combats
   has_many :combats, :through => :user_combats
+
+  scope :excluding_ids, lambda { |ids|
+    where(['id NOT IN (?)', ids]) if ids.any?
+  }
+
+  def fights?(combat)
+    combats.include?(combat)
+  end
+
 end

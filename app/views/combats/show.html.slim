@@ -1,21 +1,20 @@
 - model_class = Combat
 div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.titleize
-  .btn-group
-    a.btn.dropdown-toggle data-toggle="dropdown" href="#"
-      ' Add user to combat
-      span.caret
-    ul.dropdown-menu
-      - User.all.each do |user|
-        li= link_to user.email, join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id)
+  - if @users_not_in_combat.any?
+    .btn-group
+      a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+        ' Add user to combat
+        span.caret
+      ul.dropdown-menu
+        - @users_not_in_combat.each do |user|
+          - unless user.fights?(@combat)
+            li= link_to user.email, join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id)
 
   - @combat.users.each do |user|
     = render 'team', combat: @combat, user: user
-
-
-
-
-  = render 'combat_actions', combat_actions: @combat_actions
+  - if @combat_actions.any?
+    = render 'combat_actions', combat_actions: @combat_actions
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), combats_path, :class => 'btn'
