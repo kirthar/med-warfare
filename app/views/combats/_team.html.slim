@@ -1,0 +1,18 @@
+h2
+  ' Team #{user.email}
+  = link_to 'Leave combat', leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-danger', method: :delete
+ul.unstyled.inline
+  - user.units.each do |unit|
+    li
+      .btn-group
+        a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+          =' unit.name
+          span.caret
+        ul.dropdown-menu
+          - unit.skills.each do |skill|
+            li.dropdown-submenu
+              a(href="#")=skill
+              ul.dropdown-menu
+                - @combat.units.each do |target|
+                  li
+                    = link_to target.name, use_skill_combat_unit_path(combat_id: combat.id, id: unit.id, skill: skill, target: target), method: :post
