@@ -15,6 +15,10 @@ class UsersController < ApplicationController
   def leave_combat
     if user_combat = UserCombat.find_by_combat_id_and_user_id(params[:combat_id], @user.id)
       user_combat.delete
+
+      combat = Combat.find(params[:combat_id])
+      combat.destroy unless combat.users.any?
+
       flash[:success] = 'The user left the combat.'
     else
       flash[:alert] = 'This user is not in the combat.'
