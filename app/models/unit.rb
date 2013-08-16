@@ -89,7 +89,7 @@ class Unit < ActiveRecord::Base
     end
 
     def earn_experience(amount)
-      update_attribute(:experience, experience + amount)
+      update_attribute(:experience, max(experience + amount, 10))
     end
 
     def is_physical?(dmg_type)
