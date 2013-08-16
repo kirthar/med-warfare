@@ -18,7 +18,7 @@ class CombatsController < ApplicationController
 
     respond_to do |format|
       if @combat.save
-        UserCombat.create(user: current_user, combat: @combat)
+        UserCombat.create(user: current_user, combat: @combat, challange_state: :accepted)
         UserCombat.create(user: User.find(params[:user_combats][:user_id]), combat: @combat)
         format.html { redirect_to @combat, notice: 'Combat was successfully created.' }
         format.json { render json: @combat, status: :created, location: @combat }
