@@ -3,6 +3,7 @@ class CreateUserCombats < ActiveRecord::Migration
     create_table :user_combats do |t|
       t.references :user
       t.references :combat
+      t.string :challange_state
       t.timestamps
     end
     add_index :user_combats, :user_id
