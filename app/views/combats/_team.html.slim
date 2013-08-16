@@ -16,6 +16,8 @@ ul.unstyled.inline
       .btn-group
         - if unit.dead?
           .btn.disabled #{unit.name} &#9760;
+        - elsif challange.surrendered? or challange.rejected?
+          .btn.disabled #{unit.name}
         - else
           a.btn.dropdown-toggle data-toggle="dropdown" href="#"
             =' unit.name
