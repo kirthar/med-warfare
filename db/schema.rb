@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(:version => 20130813213314) do
   add_index "combat_actions", ["unit_id"], :name => "index_combat_actions_on_unit_id"
 
   create_table "combats", :force => true do |t|
+    t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+  add_index "combats", ["status"], :name => "index_combats_on_status"
 
   create_table "unit_images", :force => true do |t|
     t.string   "image"
@@ -60,12 +62,14 @@ ActiveRecord::Schema.define(:version => 20130813213314) do
   create_table "user_combats", :force => true do |t|
     t.integer  "user_id"
     t.integer  "combat_id"
+    t.string   "challange_state"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   add_index "user_combats", ["combat_id"], :name => "index_user_combats_on_combat_id"
   add_index "user_combats", ["user_id"], :name => "index_user_combats_on_user_id"
+  add_index "user_combats", ["challange_state"], :name => "index_user_combats_on_challange_state"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

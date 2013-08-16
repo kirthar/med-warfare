@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     combats.include?(combat)
   end
 
+  def challange(combat)
+    UserCombat.find_by_combat_id_and_user_id(combat.id, id)
+  end
+
 end
