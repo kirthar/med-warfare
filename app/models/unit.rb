@@ -38,12 +38,12 @@ class Unit < ActiveRecord::Base
     DMG_TYPE_SLASHING
   end
 
-  def use_skill(skill, target)
-    skill.classify.constantize.skill(self, target)
+  def use_skill(skill_name, target)
+    ('skills::'+skill_name.capitalize).classify.constantize.skill(self, target)
   end
 
   def can_target_skill?(skill_name, target)
-    skill = skill_name.classify.constantize
+    skill = ('skills::'+skill_name.capitalize).classify.constantize
 
     return skill.can_target_self? if target == self
 
@@ -89,7 +89,7 @@ class Unit < ActiveRecord::Base
     end
 
     def earn_experience(amount)
-      update_attribute(:experience, max(experience + amount, 10))
+      update_attribute(:experience, [experience + amount, 10].max)
     end
 
     def is_physical?(dmg_type)
