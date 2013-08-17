@@ -1,30 +1,28 @@
 .team
-  h2
-    ' Team #{user.email}
-    - challange = user.challange(@combat)
-    - if challange.pending?
-      = link_to 'Accept challange', join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-success'
-    - elsif challange.surrendered?
-      em.muted Gived up
-    - elsif challange.rejected?
-      em.muted Rejected
-    - else
-      - leave_combat_btn_text = @combat.in_course? ? 'Surrender' : 'Leave combat'
-      = link_to leave_combat_btn_text, leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-danger', method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
-  ul.unstyled.inline
-    - user.units.each do |unit|
-      li.unit
-        .btn-group
-          = image_tag unit.default_image.small.url if unit.default_image.present?
-          - if unit.dead?
-            .btn.btn-block.disabled #{unit.name} &#9760;
-          - elsif challange.surrendered? or challange.rejected? or not combat.in_course?
-            .btn.btn-block.disabled #{unit.name}
-          - else
-            a.btn.btn-block.dropdown-toggle data-toggle="dropdown" href="#"
-              =' unit.name
-              | (
-              =' unit.current_health
-              | )
-              span.caret
-            = render 'skills', combat: combat, unit: unit
+  .row-fluid
+    .span12
+      h2
+        ' Team #{user.email}
+        - challange = user.challange(@combat)
+        - if challange.pending?
+          = link_to 'Accept challange', join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-success'
+        - elsif challange.surrendered?
+          em.muted Gived up
+        - elsif challange.rejected?
+          em.muted Rejected
+        - else
+          - leave_combat_btn_text = @combat.in_course? ? 'Surrender' : 'Leave combat'
+          = link_to leave_combat_btn_text, leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-danger', method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+    ul.unstyled.inline
+      - user.units.each do |unit|
+        .span2
+          li.unit
+            .btn-group
+              = image_tag unit.default_image.small.url if unit.default_image.present?
+            - if unit.dead?
+              .btn.btn-block.disabled #{unit.name} &#9760;
+            - elsif challange.surrendered? or challange.rejected? or not combat.in_course?
+              .btn.btn-block.disabled #{unit.name}
+            - else
+              a.btn.btn-block.dropdown-toggle data-toggle="dropdown" href="#"
+                =' unit.name
