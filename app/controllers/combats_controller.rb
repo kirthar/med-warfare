@@ -2,6 +2,7 @@ class CombatsController < ApplicationController
   load_and_authorize_resource
 
   def show
+    @unit = @combat.units.first
     @combat_actions = @combat.combat_actions.newest_first
     @users_not_in_combat = User.excluding_ids(@combat.users.pluck(:id))
   end
@@ -12,6 +13,13 @@ class CombatsController < ApplicationController
 
   def new
     @users_excluding_me = User.excluding_ids([current_user.id]).map{|user| [user.email, user.id]}
+  end
+
+  def turn
+    @unit = params[:unit_id] ? Unit.find(params[:unit_id]) : @combat.units.first
+    @combat_actions = @combat.combat_actions.newest_first
+    @users_not_in_combat = User.excluding_ids(@combat.users.pluck(:id))
+    render 'show'
   end
 
   def create
