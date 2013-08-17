@@ -9,6 +9,7 @@ class Ability
       can [:new, :create], Combat
       can [:new, :create, :show], CombatAction
       can :manage, Unit, id: user.units.pluck(:id)
+      can :manage, UnitImage, unit_id: user.units.pluck(:id)
       can :manage, Combat, id: user.combats.pluck(:id)
       can :manage, CombatAction, unit_id: user.units.pluck(:id)
     end

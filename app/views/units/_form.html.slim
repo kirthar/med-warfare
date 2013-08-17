@@ -1,8 +1,12 @@
 = form_for  @unit, url: @unit.becomes(Unit), :html => { :class => "form-horizontal", :multipart => true } do |f|
-  .control-group
+
+  - klass = @unit.errors[:name].any? ? 'control-group error' : 'control-group'
+  div class=klass
     = f.label :name, :class => 'control-label'
     .controls
       = f.text_field :name, :class => 'text_field'
+      .help-inline= @unit.errors[:name].first if @unit.errors[:name]
+
   .control-group
     = f.label :image, :class => 'control-label'
     .controls
@@ -15,7 +19,7 @@
   .control-group
     = f.label :type, :class => 'control-label'
     .controls
-      =f.select :type, Unit::CLASSES, :class => 'select_field', selected: @unit.class
+      = select_tag :type_name, options_for_select(Unit::CLASSES, @unit.class.name.demodulize), :class => 'select_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '

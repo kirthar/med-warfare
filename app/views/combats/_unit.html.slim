@@ -1,0 +1,30 @@
+.unit
+  h3
+    =' unit.name
+    small lvl. #{unit.level}
+  .row-fluid
+    .span6
+      .thumbnail
+        = image_tag unit.default_image.standard.url
+      small
+        em= unit.description
+    .span6
+      div style='text-align: center;'
+        span.bar-precentage #{unit.current_health}/#{unit.max_health}
+        .progress
+          - if unit.current_health <= unit.max_health
+            - remaining_health = 100*unit.current_health/unit.max_health
+            - lost_health = 100-remaining_health
+          - else
+            - remaining_health = 100*unit.max_health/unit.current_health
+            - extra_health = 100-remaining_health
+          .bar.bar-success style="width: #{remaining_health }%;"
+          .bar.bar-danger style="width: #{lost_health}%;"
+          .bar style="width: #{extra_health}%;"
+      .stats
+        = render 'units/stats', unit: unit
+      .btn-block.btn-group
+        a.btn.btn-block.dropdown-toggle data-toggle="dropdown" href="#"
+          ' Use skill
+          span.caret
+        = render 'skills', combat: combat, unit: unit

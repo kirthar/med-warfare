@@ -15,24 +15,34 @@ class UnitsController < ApplicationController
 
   def create
     @unit.user = current_user
-    if @unit.save
-      if params[:unit_images].present?
-        UnitImage.create(image: params[:unit_images][:image], unit: @unit)
+    @unit.type = 'Units::'+params[:type_name] if params[:type_name]
+
+    respond_to do |format|
+      if @unit.save
+        if params[:unit_images].present?
+          UnitImage.create(image: params[:unit_images][:image], unit: @unit)
+        end
+        format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+        format.json { render json: @unit, status: :created, location: @unit }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
-      redirect_to unit_path(@unit)
-    else
-      redirect_to new_unit_path
     end
   end
 
   def update
-    if @unit.update_attributes(params[:unit])
-      if params[:unit_images].present?
-        UnitImage.create(image: params[:unit_images][:image], unit: @unit)
+    respond_to do |format|
+      if @unit.update_attributes(params[:unit])
+        if params[:unit_images].present?
+          UnitImage.create(image: params[:unit_images][:image], unit: @unit)
+        end
+        format.html { redirect_to @unit.becomes(Unit), notice: 'Unit was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
-      redirect_to unit_path(@unit)
-    else
-      redirect_to edit_unit_path(@unit)
     end
   end
 
@@ -49,8 +59,9 @@ class UnitsController < ApplicationController
     target = Unit.find(params[:target])
     combat = Combat.find(params[:combat_id])
     skill = params[:skill]
-    @unit.use_skill(skill, target)
-    CombatAction.create(unit: @unit, target: target, action: skill, combat: combat)
+    result = @unit.use_skill(skill, target)
+    CombatAction.create(unit: @unit, target: target, action: skill, combat: combat, result: result)
     redirect_to :back
   end
+
 end

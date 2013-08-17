@@ -1,6 +1,7 @@
 class CombatActionsController < ApplicationController
   load_and_authorize_resource
 
+
   def create
     if @combat_action.save
       redirect_to @combat_action

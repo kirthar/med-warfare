@@ -4,7 +4,8 @@ class CreateActions < ActiveRecord::Migration
       t.references :unit
       t.references :target
       t.references :combat
-      t.string :action
+      t.string     :action
+      t.string     :result
 
       t.timestamps
     end

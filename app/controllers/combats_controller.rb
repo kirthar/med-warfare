@@ -23,7 +23,7 @@ class CombatsController < ApplicationController
         format.html { redirect_to @combat, notice: 'Combat was successfully created.' }
         format.json { render json: @combat, status: :created, location: @combat }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @combat.errors, status: :unprocessable_entity }
       end
     end
@@ -36,7 +36,7 @@ class CombatsController < ApplicationController
         format.html { redirect_to @combat, notice: 'Combat was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @combat.errors, status: :unprocessable_entity }
       end
     end

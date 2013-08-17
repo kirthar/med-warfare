@@ -21,5 +21,7 @@ class Combat < ActiveRecord::Base
 
   end
 
-
+  def all_dead?(units)
+    not units.any? { |unit| unit.alive? }
+  end
 end

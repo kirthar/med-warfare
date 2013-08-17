@@ -26,7 +26,7 @@ table class="table table-striped"
         td= link_to unit.id, unit_path(unit)
         td= unit.default_image.present? ? image_tag(unit.default_image.mini.url) : 'no image'
         td= unit.name
-        td= unit.type
+        td= unit.type.demodulize
         td= unit.description
         td=l unit.created_at
         td
