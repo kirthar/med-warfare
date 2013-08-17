@@ -7,18 +7,23 @@ table.table.table-striped.table-hover
       th= model_class.human_attribute_name(:unit_id)
       th= model_class.human_attribute_name(:target_id)
       th= model_class.human_attribute_name(:action)
-      th
-      th
-      th
-      th
+      th= model_class.human_attribute_name(:result)
+      th=
   tbody
     - combat_actions.each do |action|
-      tr
+      - dead = action.result['target']['dead'].present? ? '&#9760;' : ''
+      - if dead.present?
+        - row_class = 'error'
+      - elsif action.result['heal'].present?
+        - row_class = action.result['heal']['resurrect'].present? ? 'success' : 'info'
+      - else
+        - row_class =  ''
+
+      tr class=row_class
         td #{time_ago_in_words(action.created_at)} ago
         td= action.unit.name
-        td= action.target.name
+        td= action.result['target']['name'] + ' ' + raw(dead)
         td= action.action
-        td
-        td
-        td
-        td
+        td= action.result['heal']
+        td= action.result['damage']
+

@@ -8,6 +8,7 @@ class ImageUploader < BaseUploader
 
   version :small do
     process :set_width => 120
+    process :set_height => 120
   end
 
   version :standard do
@@ -25,7 +26,6 @@ class ImageUploader < BaseUploader
   def filename
     "something.jpg" if original_filename
   end
-
 
   # Custom methods
   def set_width(width)

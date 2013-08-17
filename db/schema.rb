@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20130813213314) do
     t.integer  "target_id"
     t.integer  "combat_id"
     t.string   "action"
+    t.string   "result"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

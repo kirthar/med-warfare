@@ -20,6 +20,7 @@ module Skills
       def enemy_fire?
         true
       end
+
     end
   end
 end

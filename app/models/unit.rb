@@ -1,6 +1,8 @@
 class Unit < ActiveRecord::Base
   attr_accessible :description, :name, :type, :unit_images_attributes, :user
 
+  validates_presence_of :name, :type, :user
+
   CLASSES = %w{Archer Mage Rogue Knight Priest}
 
   EXP_PER_KILL = 0.1
@@ -11,18 +13,22 @@ class Unit < ActiveRecord::Base
   # Damage Types
   # Physical
   DMG_TYPE_PHYSICAL = 0
-  DMG_TYPE_SLASHING = 1
-  DMG_TYPE_PIERCING = 2
-  DMG_TYPE_CRUSHING = 3
+  DMG_TYPE_MAGICAL  = 1
+  DMG_TYPE_HEALING  = 2
+
+  DMG_TYPE_SLASHING = 10
+  DMG_TYPE_PIERCING = 20
+  DMG_TYPE_CRUSHING = 30
 
   # Magic
-  DMG_TYPE_MAGIC = 10
-  DMG_TYPE_FIRE  = 20
-  DMG_TYPE_ICE   = 30
-  DMG_TYPE_EARTH = 40
-  DMG_TYPE_WIND  = 50
+  DMG_TYPE_MAGIC = 11
+  DMG_TYPE_FIRE  = 21
+  DMG_TYPE_ICE   = 31
+  DMG_TYPE_EARTH = 41
+  DMG_TYPE_WIND  = 51
 
-  DMG_TYPE_HEAL  = 100
+  DMG_TYPE_HEAL       = 12
+  DMG_TYPE_RESURRECT  = 22
 
   belongs_to :user
   has_many :unit_images, :dependent => :destroy
@@ -31,7 +37,13 @@ class Unit < ActiveRecord::Base
   scope :by_type, lambda {|name| where(type: name) }
 
   def default_image
-    unit_images.first.image if unit_images.any?
+    if unit_images.any?
+      unit_images.first.image
+    else
+      #type.demodulize.downcase + '.jpg'
+      nil
+    end
+
   end
 
   def default_dmg_type
@@ -39,7 +51,8 @@ class Unit < ActiveRecord::Base
   end
 
   def use_skill(skill_name, target)
-    ('skills::'+skill_name.capitalize).classify.constantize.skill(self, target)
+    result = ('skills::'+skill_name.capitalize).classify.constantize.skill(self, target)
+    result.merge(action: skill_name)
   end
 
   def can_target_skill?(skill_name, target)
@@ -70,16 +83,47 @@ class Unit < ActiveRecord::Base
   end
 
   def do_damage_to(target, amount, dmg_type=DMG_TYPE_SLASHING)
-    case dmg_type
-      when DMG_TYPE_HEAL
-        amount = -1 * amount
-    end
+    amount = -1 * amount if is_healing?(dmg_type)
 
     target.receive_damage(amount)
 
     if target.dead?
       earn_experience(target.experience * EXP_PER_KILL)
     end
+
+    unit = {
+      unit: {
+        id: id,
+        name: name
+      }
+    }
+
+    if is_healing?(dmg_type)
+      heal = {
+        heal: {
+          amount: amount
+        }
+      }
+      heal[:heal] = heal[:heal].merge({resurrect: true}) if dmg_type == DMG_TYPE_RESURRECT
+    else
+      damage = {
+        damage: {
+          type: dmg_type,
+          amount: amount
+        }
+      }
+    end
+
+    target_hash = {
+      target: {
+        id: target.id,
+        name: target.name
+      }
+    }
+    target_hash[:target] = target_hash[:target].merge({dead: true}) if target.dead?
+    unit = unit.merge(damage) if damage
+    unit = unit.merge(heal) if heal
+    unit = unit.merge(target_hash) if target_hash
   end
 
   protected
@@ -93,7 +137,15 @@ class Unit < ActiveRecord::Base
     end
 
     def is_physical?(dmg_type)
-      (dmg_type / 10) == DMG_TYPE_PHYSICAL
+      (dmg_type % 10) == DMG_TYPE_PHYSICAL
+    end
+
+    def is_healing?(dmg_type)
+      (dmg_type % 10) == DMG_TYPE_HEALING
+    end
+
+    def is_magical?(dmg_type)
+      (dmg_type % 10) == DMG_TYPE_MAGICAL
     end
 
 end

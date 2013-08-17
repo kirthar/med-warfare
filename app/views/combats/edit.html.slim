@@ -10,6 +10,6 @@ div class="page-header"
     ul.dropdown-menu
       - @users_not_in_combat.each do |user|
         - unless user.fights?(@combat)
-          li= link_to user.email, join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id)
+          li= link_to user.email, send_challange_combat_user_path(combat_id: @combat.id, id: user.id)
 - @combat.users.each do |user|
   = render 'team', combat: @combat, user: user

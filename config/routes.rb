@@ -10,6 +10,7 @@ MedWarfare::Application.routes.draw do
     end
     resources :users, only: :none do
       get :join_to_combat, on: :member
+      get :send_challange, on: :member
       delete :leave_combat, on: :member
     end
   end
