@@ -1,7 +1,8 @@
 - model_class = Combat
 div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human.titleize
-  h2.muted= @combat.status.humanize
+  h1
+    ='t '.title', :default => model_class.model_name.human.titleize
+    small= @combat.status.humanize
   - if @users_not_in_combat.any? and @combat.pending?
     .btn-group
       a.btn.dropdown-toggle data-toggle="dropdown" href="#"
@@ -11,15 +12,13 @@ div class="page-header"
         - @users_not_in_combat.each do |user|
           - unless user.fights?(@combat)
             li= link_to user.email, send_challange_combat_user_path(combat_id: @combat.id, id: user.id)
-
-- @combat.users.each_with_index do |user, index|
-  - if index.even?
-    .row-fluid
-      .span6
+.container-fluid
+  .row-fluid
+    .span6
+      = render 'unit', combat: @combat, unit: @combat.units.first
+    .span6
+      - @combat.users.each do |user|
         = render 'team', combat: @combat, user: user
-      - if next_user = @combat.users[index+1]
-        .span6
-          = render 'team', combat: @combat, user: next_user
 
 
 - if @combat_actions.any?

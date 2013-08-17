@@ -47,7 +47,14 @@ class Unit < ActiveRecord::Base
   end
 
   def default_dmg_type
-    DMG_TYPE_SLASHING
+    self.class::DMG_TYPE_SLASHING
+  end
+
+  def base_dmg
+    self.class::BASE_DMG
+  end
+  def magic_dmg
+    self.class::MAGIC_DMG
   end
 
   def use_skill(skill_name, target)

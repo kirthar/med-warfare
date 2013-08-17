@@ -1,6 +1,6 @@
 = form_for  @unit, url: @unit.becomes(Unit), :html => { :class => "form-horizontal", :multipart => true } do |f|
 
-  - klass = @unit.errors[:name] ? 'control-group error' : 'control-group'
+  - klass = @unit.errors[:name].any? ? 'control-group error' : 'control-group'
   div class=klass
     = f.label :name, :class => 'control-label'
     .controls

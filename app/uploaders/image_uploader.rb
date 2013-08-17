@@ -12,7 +12,8 @@ class ImageUploader < BaseUploader
   end
 
   version :standard do
-    process :set_width => 300
+    process :set_width => 360
+    process :set_height => 500
   end
 
   version :large do
