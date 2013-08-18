@@ -5,6 +5,7 @@ MedWarfare::Application.routes.draw do
   devise_for :users
 
   resources :combats do
+    get 'unit/:unit_id', to: 'combats#turn', on: :member, as: 'turn_unit'
     resources :units, only: :none do
       post :use_skill, on: :member
     end

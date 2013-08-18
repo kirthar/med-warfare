@@ -59,7 +59,7 @@ class Unit < ActiveRecord::Base
 
   def use_skill(skill_name, target)
     result = ('skills::'+skill_name.capitalize).classify.constantize.skill(self, target)
-    result.merge(action: skill_name)
+    result.merge(action: skill_name) unless result.nil?
   end
 
   def can_target_skill?(skill_name, target)
@@ -90,9 +90,18 @@ class Unit < ActiveRecord::Base
   end
 
   def do_damage_to(target, amount, dmg_type=DMG_TYPE_SLASHING)
-    amount = -1 * amount if is_healing?(dmg_type)
 
-    target.receive_damage(amount)
+    if is_physical?(dmg_type)
+      if dmg_type == DMG_TYPE_PIERCING
+        amount = amount * (100 + dexterity)/100
+      else
+        amount = amount * (100 + strength)/100
+      end
+    elsif is_magical?(dmg_type)
+      amount = amount * (100 + intelligence)/100
+    end
+
+    amount = target.receive_damage(amount.ceil, dmg_type)
 
     if target.dead?
       earn_experience(target.experience * EXP_PER_KILL)
@@ -135,8 +144,17 @@ class Unit < ActiveRecord::Base
 
   protected
 
-    def receive_damage(amount)
-      update_attribute(:current_health, current_health - amount)
+    def receive_damage(amount, dmg_type)
+      if is_physical?(dmg_type)
+        amount = amount * (100 - physical_resist)/100
+      elsif is_magical?(dmg_type)
+        amount = amount * (100 - magical_resist)/100
+      elsif is_healing?(dmg_type)
+        amount = -1 * amount if is_healing?(dmg_type)
+      end
+
+      update_attribute(:current_health, current_health - amount.ceil)
+      amount.ceil
     end
 
     def earn_experience(amount)

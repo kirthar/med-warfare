@@ -15,7 +15,7 @@ div class="page-header"
 .container-fluid
   .row-fluid
     .span6
-      = render 'unit', combat: @combat, unit: @combat.units.first
+      = render 'unit', combat: @combat, unit: @unit
     .span6
       - @combat.users.each do |user|
         = render 'team', combat: @combat, user: user
