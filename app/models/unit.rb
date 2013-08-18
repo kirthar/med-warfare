@@ -131,8 +131,7 @@ class Unit < ActiveRecord::Base
       damage = {damage: {type: dmg_type, amount: amount}}
     end
 
-    target_hash = {target: {id: target.id, name: target.name}}
-    target_hash[:target] = target_hash[:target].merge({dead: true}) if target.dead?
+    target_hash = {target: {id: target.id, name: target.name, dead: target.dead?}}
     damage_log = damage_log.merge(damage) if damage
     damage_log = damage_log.merge(heal) if heal
     damage_log = damage_log.merge(target_hash) if target_hash

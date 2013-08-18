@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 
 # Frontend
 gem 'slim-rails'
@@ -13,6 +13,7 @@ gem 'mini_magick'
 
 # Database
 gem 'mysql2'
+gem 'sqlite3'
 
 # User Management
 gem 'devise'
@@ -43,8 +44,14 @@ group :development do
   gem 'localtunnel'
   gem 'meta_request'
   gem 'rack-mini-profiler'
+  gem 'factory_girl_rails'
 end
 
+group :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'capybara'
+end
 # Deploy with Capistrano
 # gem 'capistrano'
 
