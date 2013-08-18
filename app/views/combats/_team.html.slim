@@ -2,7 +2,7 @@
   .row-fluid
     .span12
       h2
-        ' Team #{user.email}
+        ' Team #{user.username}
         - challange = user.challange(@combat)
         - if challange.pending?
           = link_to 'Accept challange', join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-small btn-success'

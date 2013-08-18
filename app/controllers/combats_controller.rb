@@ -13,7 +13,7 @@ class CombatsController < ApplicationController
   end
 
   def new
-    @users_excluding_me = User.excluding_ids([current_user.id]).map{|user| [user.email, user.id]}
+    @users_excluding_me = User.excluding_ids([current_user.id]).map{|user| [user.username, user.id]}
   end
 
   def create
