@@ -1,10 +1,11 @@
 User.destroy_all
 Unit.destroy_all
 
-user1 = User.create(email: 'chris+mw+test+1@itnig.net', password: '12345678')
-user2 = User.create(email: 'chris+mw+test+2@itnig.net', password: '12345678')
-user3 = User.create(email: 'chris+mw+test+3@itnig.net', password: '12345678')
-user4 = User.create(email: 'chris+mw+test+4@itnig.net', password: '12345678')
+admin = User.create(username: 'Admin',         email: 'admin@itnig.net', password: 'iamadmin', admin: true)
+user1 = User.create(username: 'Kirthar',       email: 'chris+mw+test+1@itnig.net', password: '12345678')
+user2 = User.create(username: 'Gandark',       email: 'chris+mw+test+2@itnig.net', password: '12345678')
+user3 = User.create(username: 'Pijus Maximus', email: 'chris+mw+test+3@itnig.net', password: '12345678')
+user4 = User.create(username: 'Dummie',        email: 'chris+mw+test+4@itnig.net', password: '12345678')
 
 unit = Units::Archer.create(name: 'Legolas', description: 'Ultra awesome elf. Also very gayer.', user: user1)
 UnitImage.create(unit: unit, image: File.open(Rails.root.join("db/seed_data/unit_images/archer_man.jpg").to_s) )

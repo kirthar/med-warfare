@@ -6,6 +6,11 @@ h2
   = devise_error_messages!
 
   .control-group
+    = f.label :login, :class => 'control-label'
+    .controls
+      = f.text_field :login, :class => 'text_field', :autofocus => true
+
+  .control-group
     = f.label :email, :class => 'control-label'
     .controls
       = f.email_field :email, :class => 'email_field', :autofocus => true
