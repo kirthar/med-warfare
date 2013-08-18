@@ -1,6 +1,7 @@
 User.destroy_all
 Unit.destroy_all
 
+admin = User.create(username: 'Admin',         email: 'admin@itnig.net', password: 'iamadmin', admin: true)
 user1 = User.create(username: 'Kirthar',       email: 'chris+mw+test+1@itnig.net', password: '12345678')
 user2 = User.create(username: 'Gandark',       email: 'chris+mw+test+2@itnig.net', password: '12345678')
 user3 = User.create(username: 'Pijus Maximus', email: 'chris+mw+test+3@itnig.net', password: '12345678')
