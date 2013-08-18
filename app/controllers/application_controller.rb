@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || resource.is_a?(User) ? units_url : super
   end
 
+  def authorize
+    Rack::MiniProfiler.authorize_request
+  end
+
 end
