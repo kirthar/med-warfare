@@ -20,9 +20,10 @@
             .btn-group
               = image_tag unit.default_image.small.url if unit.default_image.present?
             - if unit.dead?
-              .btn.btn-block.disabled #{unit.name} &#9760;
-            - elsif challange.surrendered? or challange.rejected? or not combat.in_course?
-              .btn.btn-block.disabled #{unit.name}
-            - else
-              a.btn.btn-block href=turn_unit_combat_path(id: @combat.id, unit_id: unit.id)
+              span.muted
                 =' unit.name
+                | &#9760;
+            - elsif challange.surrendered? or challange.rejected?
+              span.muted= unit.name
+            - else
+              span=' unit.name

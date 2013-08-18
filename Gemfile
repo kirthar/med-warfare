@@ -42,6 +42,7 @@ group :development do
   gem 'rails-footnotes'
   gem 'localtunnel'
   gem 'meta_request'
+  gem 'rack-mini-profiler'
 end
 
 # Deploy with Capistrano

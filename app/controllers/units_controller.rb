@@ -61,6 +61,7 @@ class UnitsController < ApplicationController
     skill = params[:skill]
     result = @unit.use_skill(skill, target)
     CombatAction.create(unit: @unit, target: target, action: skill, combat: combat, result: result)
+    combat.next_turn!
     redirect_to :back
   end
 

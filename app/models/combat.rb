@@ -12,6 +12,9 @@ class Combat < ActiveRecord::Base
     state :finished
 
     event :start do
+      after do
+        set_current_unit
+      end
       transitions :from => :pending, :to => :in_course
     end
 
@@ -23,5 +26,22 @@ class Combat < ActiveRecord::Base
 
   def all_dead?(units)
     not units.any? { |unit| unit.alive? }
+  end
+
+  def next_turn!
+    return units.first unless units.alive.any? and current_unit_id.present?
+    next_units = units.alive.after(current_unit)
+    next_unit = next_units.any? ? next_units.first : units.alive.ordered.first
+    update_attribute(:current_unit_id, next_unit.id)
+  end
+
+  def current_unit
+    return nil unless current_unit_id.present? and current_unit = Unit.find(current_unit_id)
+    current_unit
+  end
+
+  def set_current_unit
+    initial_unit = units.alive.ordered.first
+    update_attribute(:current_unit_id, initial_unit.id)
   end
 end

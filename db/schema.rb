@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813213314) do
+ActiveRecord::Schema.define(:version => 20130818100411) do
 
   create_table "combat_actions", :force => true do |t|
     t.integer  "unit_id"
@@ -28,10 +28,12 @@ ActiveRecord::Schema.define(:version => 20130813213314) do
   add_index "combat_actions", ["unit_id"], :name => "index_combat_actions_on_unit_id"
 
   create_table "combats", :force => true do |t|
+    t.integer  "current_unit_id"
     t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
   add_index "combats", ["status"], :name => "index_combats_on_status"
 
   create_table "unit_images", :force => true do |t|
@@ -48,35 +50,36 @@ ActiveRecord::Schema.define(:version => 20130813213314) do
     t.string   "name"
     t.string   "description"
     t.string   "type"
-    t.integer  "level", default: 1
-    t.integer  "experience", default: 0
-    t.integer  "max_health", default: 13
-    t.integer  "current_health", default: 13
-    t.integer :initiative, default: 10
-    t.integer :strength, default: 10
-    t.integer :dexterity, default: 10
-    t.integer :intelligence, default: 10
-    t.integer :physical_resist, default: 0
-    t.integer :magical_resist, default: 0
+    t.integer  "level",           :default => 1
+    t.integer  "experience",      :default => 0
+    t.integer  "max_health",      :default => 13
+    t.integer  "current_health",  :default => 13
+    t.integer  "initiative",      :default => 10
+    t.integer  "strength",        :default => 10
+    t.integer  "dexterity",       :default => 10
+    t.integer  "intelligence",    :default => 10
+    t.integer  "physical_resist", :default => 0
+    t.integer  "magical_resist",  :default => 0
     t.string   "status"
     t.string   "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
+  add_index "units", ["id", "type"], :name => "index_units_on_id_and_type"
   add_index "units", ["user_id"], :name => "index_units_on_user_id"
 
   create_table "user_combats", :force => true do |t|
     t.integer  "user_id"
     t.integer  "combat_id"
     t.string   "challange_state"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
+  add_index "user_combats", ["challange_state"], :name => "index_user_combats_on_challange_state"
   add_index "user_combats", ["combat_id"], :name => "index_user_combats_on_combat_id"
   add_index "user_combats", ["user_id"], :name => "index_user_combats_on_user_id"
-  add_index "user_combats", ["challange_state"], :name => "index_user_combats_on_challange_state"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

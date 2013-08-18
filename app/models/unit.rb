@@ -34,7 +34,10 @@ class Unit < ActiveRecord::Base
   has_many :unit_images, :dependent => :destroy
   accepts_nested_attributes_for :unit_images
 
+  scope :ordered, order(arel_table[:initiative].asc)
   scope :by_type, lambda {|name| where(type: name) }
+  scope :after, lambda { |unit| where("units.id > #{unit.id}").where(arel_table[:initiative].gteq(unit.initiative)).ordered }
+  scope :alive, where(arel_table[:current_health].gt(0))
 
   def default_image
     if unit_images.any?
@@ -55,6 +58,18 @@ class Unit < ActiveRecord::Base
   end
   def magic_dmg
     self.class::MAGIC_DMG
+  end
+
+  def critical_chance
+    5 + dexterity/2
+  end
+
+  def hit_chance
+    75 + dexterity
+  end
+
+  def evade_chance
+    10 + dexterity/2
   end
 
   def use_skill(skill_name, target)
@@ -107,39 +122,20 @@ class Unit < ActiveRecord::Base
       earn_experience(target.experience * EXP_PER_KILL)
     end
 
-    unit = {
-      unit: {
-        id: id,
-        name: name
-      }
-    }
-
+    # Damage log
+    damage_log = {unit: {id: id, name: name}}
     if is_healing?(dmg_type)
-      heal = {
-        heal: {
-          amount: amount
-        }
-      }
+      heal = {heal: {amount: amount} }
       heal[:heal] = heal[:heal].merge({resurrect: true}) if dmg_type == DMG_TYPE_RESURRECT
     else
-      damage = {
-        damage: {
-          type: dmg_type,
-          amount: amount
-        }
-      }
+      damage = {damage: {type: dmg_type, amount: amount}}
     end
 
-    target_hash = {
-      target: {
-        id: target.id,
-        name: target.name
-      }
-    }
+    target_hash = {target: {id: target.id, name: target.name}}
     target_hash[:target] = target_hash[:target].merge({dead: true}) if target.dead?
-    unit = unit.merge(damage) if damage
-    unit = unit.merge(heal) if heal
-    unit = unit.merge(target_hash) if target_hash
+    damage_log = damage_log.merge(damage) if damage
+    damage_log = damage_log.merge(heal) if heal
+    damage_log = damage_log.merge(target_hash) if target_hash
   end
 
   protected
