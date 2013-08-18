@@ -23,8 +23,9 @@
           .bar style="width: #{extra_health}%;"
       .stats
         = render 'units/stats', unit: unit
-      .btn-block.btn-group
-        a.btn.btn-block.dropdown-toggle data-toggle="dropdown" href="#"
-          ' Use skill
-          span.caret
-        = render 'skills', combat: combat, unit: unit
+      - if combat.in_course?
+        .btn-block.btn-group
+          a.btn.btn-block.dropdown-toggle data-toggle="dropdown" href="#"
+            ' Use skill
+            span.caret
+          = render 'skills', combat: combat, unit: unit
