@@ -30,9 +30,21 @@ class Combat < ActiveRecord::Base
 
   def next_turn!
     return units.first unless units.alive.any? and current_unit_id.present?
+
+    # Set Next Unit
     next_units = units.alive.after(current_unit)
     next_unit = next_units.any? ? next_units.first : units.alive.ordered.first
     update_attribute(:current_unit_id, next_unit.id)
+
+    # Set User as pending
+    user_combats.update_all(pending_since: nil)
+    next_user = user_combats.find_by_user_id(next_unit.user.id)
+    next_user.update_attribute(:pending_since, DateTime.current)
+
+  end
+
+  def is_team_dead?(unit)
+    all_dead?(unit.user.units)
   end
 
   def current_unit
@@ -43,5 +55,14 @@ class Combat < ActiveRecord::Base
   def set_current_unit
     initial_unit = units.alive.ordered.first
     update_attribute(:current_unit_id, initial_unit.id)
+  end
+
+  def victory?
+    if user_combats.accepted.count == 1
+      user_combats.accepted.first.win!
+      finish!
+      return user_combats.accepted.first
+    end
+    return false
   end
 end
