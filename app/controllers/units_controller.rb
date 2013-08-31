@@ -67,7 +67,7 @@ class UnitsController < ApplicationController
         combat.user_combats.find_by_user_id(target.user.id).die!
         winner = combat.victory?
         if winner.present?
-          flash[:success] = "#{winner.user.username} has won the combat!"
+          flash[:success] = "#{winner.username} has won the combat!"
           return redirect_to combats_path
         end
       end

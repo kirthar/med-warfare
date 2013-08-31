@@ -62,6 +62,10 @@ class Combat < ActiveRecord::Base
     winner = user_combats.accepted.first
     winner.win!
     finish!
-    winner
+    winner.user
+  end
+
+  def winner
+    user_combats.won.first.user
   end
 end

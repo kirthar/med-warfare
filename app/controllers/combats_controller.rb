@@ -53,4 +53,15 @@ class CombatsController < ApplicationController
     end
   end
 
+
+  def victory
+    unless @winner = @combat.winner
+      flash[:error] = 'This combat does not have a winner yet.'
+      return redirect_to @combat
+    end
+
+    @money_per_win = 100
+    @exp_per_win = 100
+  end
+
 end
