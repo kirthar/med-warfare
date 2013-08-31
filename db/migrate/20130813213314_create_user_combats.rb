@@ -4,6 +4,7 @@ class CreateUserCombats < ActiveRecord::Migration
       t.references :user
       t.references :combat
       t.string :challange_state
+      t.datetime :pending_since
       t.timestamps
     end
     add_index :user_combats, :user_id

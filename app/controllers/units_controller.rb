@@ -27,7 +27,7 @@ class UnitsController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: @unit.errors, status: :unprocessable_entity }
-      end
+        end
     end
   end
 
@@ -61,7 +61,20 @@ class UnitsController < ApplicationController
     skill = params[:skill]
     result = @unit.use_skill(skill, target)
     CombatAction.create(unit: @unit, target: target, action: skill, combat: combat, result: result)
+
+    if target.dead?
+      if combat.is_team_dead?(target)
+        combat.user_combats.find_by_user_id(target.user.id).die!
+        winner = combat.victory?
+        if winner.present?
+          flash[:success] = "#{winner.username} has won the combat!"
+          return redirect_to combats_path
+        end
+      end
+    end
+
     combat.next_turn!
+
     redirect_to :back
   end
 

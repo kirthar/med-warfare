@@ -14,6 +14,8 @@ MedWarfare::Application.routes.draw do
       get :send_challange, on: :member
       delete :leave_combat, on: :member
     end
+
+    get 'victory', on: :member
   end
 
   resources :combat_actions

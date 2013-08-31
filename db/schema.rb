@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20130818220740) do
     t.integer  "user_id"
     t.integer  "combat_id"
     t.string   "challange_state"
+    t.datetime "pending_since"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
