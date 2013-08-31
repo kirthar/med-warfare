@@ -25,5 +25,6 @@ MedWarfare::Application.routes.draw do
   end
 
   resources :unit_images, only: :destroy
-
+  resources :users
+  resources :friendships
 end

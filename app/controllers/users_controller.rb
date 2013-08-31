@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   load_resource
 
+  def index
+    @users = User.all
+  end
 
   def send_challange
     combat = Combat.find(params[:combat_id])
