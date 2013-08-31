@@ -5,35 +5,29 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:username)
       th= model_class.human_attribute_name(:email)
-      th= model_class.human_attribute_name(:encrypted_password)
-      th= model_class.human_attribute_name(:reset_password_token)
-      th= model_class.human_attribute_name(:reset_password_sent_at)
-      th= model_class.human_attribute_name(:remember_created_at)
-      th= model_class.human_attribute_name(:current_sign_in_at)
-      th= model_class.human_attribute_name(:last_sign_in_at)
-      th= model_class.human_attribute_name(:current_sign_in_ip)
-      th= model_class.human_attribute_name(:last_sign_in_ip)
-      th= model_class.human_attribute_name(:created_at)
-      th=t '.combat_actions', :default => t("helpers.combat_actions")
+      th Challange
+      th Friendship
   tbody
     - @users.each do |user|
-      tr
-        td= link_to user.id, user_path(user)
-        td= user.email
-        td= user.encrypted_password
-        td= user.reset_password_token
-        td= user.reset_password_sent_at
-        td= user.remember_created_at
-        td= user.current_sign_in_at
-        td= user.last_sign_in_at
-        td= user.current_sign_in_ip
-        td= user.last_sign_in_ip
-        td=l user.created_at
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-mini'
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-
+      - unless user == current_user
+        tr
+          td= link_to user.id, user_path(user)
+          td= user.username
+          td= user.email
+          td.span2
+            = link_to send_challange_user_path(id: user.id),  class: 'btn btn-warning btn-mini btn-block' do
+              ' Send a challange
+              i.icon-fire
+          td.span2
+            - if friendship = Friendship.where(friend_id: user, user_id: current_user).first
+              = link_to friendship, method: :delete, class: 'btn btn-danger btn-mini btn-block' do
+                ' Remove Friend
+                i.icon-remove
+            - else
+              = link_to friendships_path(:friend_id => user), :method => :post, class: 'btn btn-success btn-mini btn-block' do
+                ' Add Friend
+                i.icon-plus
 = link_to t('.new', :default => t("helpers.links.new")), new_user_path, :class => 'btn btn-primary'
 
