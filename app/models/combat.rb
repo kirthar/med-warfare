@@ -58,11 +58,10 @@ class Combat < ActiveRecord::Base
   end
 
   def victory?
-    if user_combats.accepted.count == 1
-      user_combats.accepted.first.win!
-      finish!
-      return user_combats.accepted.first
-    end
-    return false
+    return false unless user_combats.accepted.count == 1
+    winner = user_combats.accepted.first
+    winner.win!
+    finish!
+    winner
   end
 end

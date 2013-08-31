@@ -27,7 +27,7 @@ class UnitsController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: @unit.errors, status: :unprocessable_entity }
-      end
+        end
     end
   end
 
@@ -66,8 +66,8 @@ class UnitsController < ApplicationController
       if combat.is_team_dead?(target)
         combat.user_combats.find_by_user_id(target.user.id).die!
         winner = combat.victory?
-        if winner
-          flash[:success] = "#{combat.user_combats.accepted.first.user.username} has won the combat!"
+        if winner.present?
+          flash[:success] = "#{winner.user.username} has won the combat!"
           return redirect_to combats_path
         end
       end
