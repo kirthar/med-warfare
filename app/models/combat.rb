@@ -66,6 +66,6 @@ class Combat < ActiveRecord::Base
   end
 
   def winner
-    user_combats.won.first.user
+    user_combats.won.first.user if user_combats.won.any?
   end
 end

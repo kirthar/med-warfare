@@ -2,6 +2,7 @@ class CombatsController < ApplicationController
   load_and_authorize_resource
 
   def show
+    return redirect_to victory_combat_path(@combat) if @combat.winner
     @unit = @combat.current_unit || @combat.units.ordered.first
     @combat_actions = @combat.combat_actions.newest_first
     @users_not_in_combat = User.excluding_ids(@combat.users.pluck(:id))
