@@ -10,3 +10,11 @@ development:
     smtp:
       address: localhost
       port: 1025
+
+  fb:
+    app_id: 349183338548660
+    app_secret: fb49af9e533e32cbc43969fca2dd118f
+
+  google:
+    app_id: 273144716358.apps.googleusercontent.com
+    app_secret: 78w07IR6fsf4b1qHS9Bdk6Cq

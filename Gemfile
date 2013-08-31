@@ -18,6 +18,9 @@ gem 'mysql2'
 gem 'devise'
 gem 'cancan'
 gem 'rolify'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem 'aasm'
 
