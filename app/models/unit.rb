@@ -44,7 +44,7 @@ class Unit < ActiveRecord::Base
       unit_images.first.image
     else
       #type.demodulize.downcase + '.jpg'
-      nil
+      UnitImage.first.image
     end
 
   end

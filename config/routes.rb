@@ -25,5 +25,8 @@ MedWarfare::Application.routes.draw do
   end
 
   resources :unit_images, only: :destroy
-
+  resources :users do
+    get :send_challange, on: :member
+  end
+  resources :friendships
 end

@@ -42,6 +42,22 @@ h2
     = f.submit nil , :class => 'btn btn-primary'
     '
     = link_to t('.cancel', :default => t("helpers.links.cancel")), combat_actions_path, :class => 'btn'
+
+
+h2 Friends
+ul
+  - for friendship in @user.friendships
+    li
+      =h friendship.friend.username
+      = link_to "remove", friendship, :method => :delete
+
+p= link_to "Find Friends", users_path
+
+h2 Friended by Users
+ul
+  - for user in @user.inverse_friends
+    li=h user.username
+
 h3 Cancel my account
 
 p

@@ -1,13 +1,24 @@
 class UsersController < ApplicationController
   load_resource
 
+  def index
+    @users = User.all
+  end
 
   def send_challange
-    combat = Combat.find(params[:combat_id])
-    if combat.users.include?(@user)
-      flash[:alert] = 'This user is already in the combat.'
+    if params[:combat_id].present?
+      combat = Combat.find(params[:combat_id])
+      if combat.users.include?(@user)
+        flash[:alert] = 'This user is already in the combat.'
+      else
+        UserCombat.create(combat: combat, user: @user, challange_state: :pending)
+        flash[:success] = "<a href=\"#{combat_path(combat)}\">Challange</a> sent to #{@user.username}"
+      end
     else
+      combat = Combat.create
+      UserCombat.create(combat: combat, user: current_user, challange_state: :accepted)
       UserCombat.create(combat: combat, user: @user, challange_state: :pending)
+      flash[:success] = "<a href=\"#{combat_path(combat)}\">Challange</a> sent to #{@user.username}"
     end
 
     redirect_to :back
