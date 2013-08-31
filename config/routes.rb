@@ -2,7 +2,7 @@ MedWarfare::Application.routes.draw do
 
   get "home/index"
   root :to => 'home#index'
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :combats do
     get 'unit/:unit_id', to: 'combats#turn', on: :member, as: 'turn_unit'

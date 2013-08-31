@@ -3,7 +3,9 @@
     .item.active
       = image_tag 'images/background_home.jpg'
       .container
-        = link_to 'Sign in', new_user_session_path, class: 'btn btn-small btn-danger sign-in'
+        =' link_to 'Sign in', new_user_session_path, class: 'btn btn-small sign-in'
+        =' link_to raw('Sign in with <strong>Facebook</strong>'), user_omniauth_authorize_path(:facebook), class: 'btn btn-small btn-primary sign-in'
+        =' link_to raw('Sign in with <strong>Google</strong>'), user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-small btn-danger sign-in'
         .carousel-caption
           h1= APP_CONFIG['title']
           p.lead Think, fight and command your units to the victory.
