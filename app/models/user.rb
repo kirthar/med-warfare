@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   attr_accessor :login
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login, :admin, :uid, :provider
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login, :admin, :uid, :provider, :name
   has_many :units
   has_many :user_combats
   has_many :combats, :through => :user_combats

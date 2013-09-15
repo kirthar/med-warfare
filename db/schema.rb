@@ -34,8 +34,6 @@ ActiveRecord::Schema.define(:version => 20130831185743) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "combats", ["status"], :name => "index_combats_on_status"
-
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -68,13 +66,13 @@ ActiveRecord::Schema.define(:version => 20130831185743) do
     t.integer  "physical_resist", :default => 0
     t.integer  "magical_resist",  :default => 0
     t.string   "status"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
 
   add_index "units", ["id", "type"], :name => "index_units_on_id_and_type"
-  add_index "units", ["user_id"], :name => "index_units_on_user_id"
+  add_index "units", ["id"], :name => "index_units_on_id"
 
   create_table "user_combats", :force => true do |t|
     t.integer  "user_id"
@@ -85,7 +83,6 @@ ActiveRecord::Schema.define(:version => 20130831185743) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "user_combats", ["challange_state"], :name => "index_user_combats_on_challange_state"
   add_index "user_combats", ["combat_id"], :name => "index_user_combats_on_combat_id"
   add_index "user_combats", ["user_id"], :name => "index_user_combats_on_user_id"
 

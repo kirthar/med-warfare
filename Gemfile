@@ -12,7 +12,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 # Database
-gem 'mysql2'
+gem 'pg'
 
 # User Management
 gem 'devise'
