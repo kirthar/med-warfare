@@ -18,6 +18,6 @@ class CreateUnits < ActiveRecord::Migration
       t.references :user
       t.timestamps
     end
-    add_index :units, :unit_id
+    add_index :units, :id
   end
 end

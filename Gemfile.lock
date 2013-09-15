@@ -115,7 +115,6 @@ GEM
       subexec (~> 0.2.1)
     multi_json (1.7.8)
     multipart-post (1.2.0)
-    mysql2 (0.3.13)
     net-ssh (2.6.8)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
@@ -137,6 +136,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
+    pg (0.16.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -229,10 +229,10 @@ DEPENDENCIES
   localtunnel
   meta_request
   mini_magick
-  mysql2
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
+  pg
   quiet_assets
   rack-mini-profiler
   rails (= 3.2.13)

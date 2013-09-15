@@ -1,10 +1,11 @@
 development:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
-  host: localhost
-  database: warfare
-  username: root
-  password:
+  host: ec2-54-228-234-250.eu-west-1.compute.amazonaws.com
+  port: 5432
+  database: danl0vq51mi2r6
+  username: fteipohkxaqopc
+  password: VS0fvzYcyrPjuuFYEUkSdvk9fJ
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
