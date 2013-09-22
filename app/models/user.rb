@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   def self.find_for_google_oauth2(auth, signed_in_resource=nil)
     data = auth.info
     user = User.where(:email => data["email"]).first
-    return user if user.user_social_logins.any?
+    return user if user and user.user_social_logins.any?
 
     unless user
       user = User.create(username: data["name"],

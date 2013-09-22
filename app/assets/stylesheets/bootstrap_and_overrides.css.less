@@ -1,0 +1,61 @@
+@import "twitter/bootstrap/bootstrap";
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+
+// Font Awesome
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+@color1: #FFB273;
+@color2: #FF9640;
+@color3: #BF7130;
+@color4: #FF7400;
+@color5: #A64B00;
+
+@bodyBackground: @white;
+@sansFontFamily: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+@navbarBackgroundHighlight: @color1;
+@navbarLinkColor: @gray;
+
+@btnPrimaryBackground: @color4;
+@btnPrimaryBackgroundHighlight: darken(@color4, 5%);
+
+.container-fluid {
+  padding-right: 75px;
+  padding-left: 75px;
+}
+.navbar {
+  background-image: '';
+  font-size: large;
+  .brand {
+    font-weight: bold;
+  }
+  .nav li a {
+    font-weight: lighter;
+    text-shadow: '';
+  }
+}

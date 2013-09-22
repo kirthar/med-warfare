@@ -39,7 +39,8 @@ div class="page-header"
             .accordion-body.collapse.in id="collapse#{user.id}"
               .accordion-inner
                 = render 'team', combat: @combat, user: user, challange: challange
-
+  .row-fluid
+    = render 'turns', units: @combat.units.alive.ordered
 
 - if @combat_actions.any?
   = render 'combat_actions', combat_actions: @combat_actions

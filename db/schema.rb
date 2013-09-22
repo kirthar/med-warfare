@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831185743) do
+ActiveRecord::Schema.define(:version => 20130915185010) do
 
   create_table "combat_actions", :force => true do |t|
     t.integer  "unit_id"
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(:version => 20130831185743) do
   add_index "user_combats", ["combat_id"], :name => "index_user_combats_on_combat_id"
   add_index "user_combats", ["user_id"], :name => "index_user_combats_on_user_id"
 
+  create_table "user_social_logins", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_social_logins", ["user_id"], :name => "index_user_social_logins_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
     t.string   "encrypted_password",     :default => "",    :null => false
@@ -103,7 +113,6 @@ ActiveRecord::Schema.define(:version => 20130831185743) do
     t.boolean  "admin",                  :default => false
     t.string   "provider"
     t.string   "uid"
-    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

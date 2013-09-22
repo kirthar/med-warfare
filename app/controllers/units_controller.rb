@@ -6,7 +6,6 @@ class UnitsController < ApplicationController
     if type = params[:by_type] and Unit::CLASSES.include?(type.capitalize)
       @units = @units.by_type(type.capitalize)
     end
-    render layout: 'sidebar'
   end
 
   def new
