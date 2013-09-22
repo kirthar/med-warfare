@@ -1,0 +1,9 @@
+.unit-thumb.big id='mainwrapper'
+  .outer
+    .inner
+      = image_tag unit.default_image.standard.url if unit.default_image.present?
+      span.caption.fade-caption
+        p Health: #{unit.current_health}/#{unit.max_health}
+        p Hit: #{unit.hit_chance}%
+        p Evade: #{unit.evade_chance}%
+        p Crit: #{unit.critical_chance}%

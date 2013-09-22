@@ -1,15 +1,18 @@
-.box
-  = image_tag unit.default_image.small.url if unit.default_image.present?
-  span.caption.fade-caption
-    p Health: #{unit.current_health}/#{unit.max_health}
-    p Hit: #{unit.hit_chance}%
-    p Evade: #{unit.evade_chance}%
-    p Crit: #{unit.critical_chance}%
-  - if unit.dead?
-    span.bottom-caption.muted
-      =' unit.name
-      | &#9760;
-  - elsif unit.user.challange(@combat).surrendered? or unit.user.challange(@combat).rejected?
-    span.bottom-caption.muted= unit.name
-  - else
-    span.bottom-caption=' unit.name
+.unit-thumb id='mainwrapper'
+  .outer
+    .inner
+      = image_tag unit.default_image.small.url if unit.default_image.present?
+      span.caption.fade-caption
+        p Health: #{unit.current_health}/#{unit.max_health}
+        p Hit: #{unit.hit_chance}%
+        p Evade: #{unit.evade_chance}%
+        p Crit: #{unit.critical_chance}%
+      - if unit.dead?
+        span.bottom-caption.muted
+          =' unit.name
+          | &#9760;
+      - elsif @combat.present?
+        - if unit.user.challange(@combat).surrendered? or unit.user.challange(@combat).rejected?
+          span.bottom-caption.muted= unit.name
+      - else
+        span.bottom-caption=' unit.name
