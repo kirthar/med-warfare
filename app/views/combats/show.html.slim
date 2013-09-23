@@ -18,24 +18,25 @@ div class="page-header"
       = render 'unit', combat: @combat, unit: @unit
     .span6
       - @combat.users.each do |user|
+        - challange = user.challange(@combat)
         .accordion id="accordion"
           .accordion-group
             .accordion-heading
-              a.accordion-toggle data-toggle="collapse" data-parent="#accordion" href="#collapse#{user.id}"
-                strong
-                  ' Team #{user.username}
-                  - challange = user.challange(@combat)
-                  - if challange.pending?
-                    = link_to 'Accept challange', join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-mini btn-success pull-right'
-                  - elsif challange.surrendered?
-                    em.muted Gived up
-                  - elsif challange.rejected?
-                    em.muted Rejected
-                  - elsif challange.dead?
-                    em.muted Dead
-                  - else
-                    - leave_combat_btn_text = @combat.in_course? ? 'Surrender' : 'Leave combat'
-                    = link_to leave_combat_btn_text, leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-mini btn-danger pull-right', method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+              .accordion-toggle.group-accordion-toggle
+                a data-toggle="collapse" data-parent="#accordion" href="#collapse#{user.id}"
+                  strong
+                    ' Team #{user.username}
+                - if challange.pending?
+                  = link_to 'Accept challange', join_to_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-mini btn-success pull-right'
+                - elsif challange.surrendered?
+                  em.muted Gived up
+                - elsif challange.rejected?
+                  em.muted Rejected
+                - elsif challange.dead?
+                  em.muted Dead
+                - else
+                  - leave_combat_btn_text = @combat.in_course? ? 'Surrender' : 'Leave combat'
+                  = link_to leave_combat_btn_text, leave_combat_combat_user_path(combat_id: @combat.id, id: user.id), class: 'btn btn-mini btn-danger pull-right', method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
             .accordion-body.collapse.in id="collapse#{user.id}"
               .accordion-inner
                 = render 'team', combat: @combat, user: user, challange: challange
