@@ -4,6 +4,9 @@ require "omniauth-google-oauth2"
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+
+  config.secret_key = '40ac77226295c349d6903b96130ca3541325f61dede9d125472cb579a8df5dccebb5cbaede6dd2455fd4a2f6219a0f906eae8f011b01177c0a24592a98f8279d'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.

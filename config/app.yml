@@ -12,8 +12,8 @@ development:
       port: 1025
 
   fb:
-    app_id: 349183338548660
-    app_secret: fb49af9e533e32cbc43969fca2dd118f
+    app_id: 475078985959094
+    app_secret: 5e56ff181841cb66b6e520bea81a4033
 
   google:
     app_id: 273144716358.apps.googleusercontent.com

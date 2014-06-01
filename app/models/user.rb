@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user_login = UserSocialLogin.where(provider: auth.provider, uid: auth.uid)
 
-    return user_login.first.user unless user_login.nil?
+    return user_login.first.user unless user_login.blank?
 
     unless user = User.find_by_email(auth.info.email)
       user = User.create(username:auth.extra.raw_info.name,
