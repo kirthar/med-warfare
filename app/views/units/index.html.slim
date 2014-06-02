@@ -1,6 +1,12 @@
 - model_class = Unit
-div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+.page-header
+  h1
+    =t '.title', :default => model_class.model_name.human.pluralize.titleize
+    .pull-right
+      = link_to new_unit_path, class: 'btn btn-primary' do
+        /= t('.new', :default => t("helpers.links.new"))
+        i.fa.fa-plus
+
 
 .row-fluid
   .center
@@ -8,5 +14,4 @@ div class="page-header"
       a href=unit_path(unit)
         = render 'big_thumb', unit: unit
 
-= link_to t('.new', :default => t("helpers.links.new")), new_unit_path, :class => 'btn btn-primary'
 

@@ -13,6 +13,7 @@ gem 'mini_magick'
 
 # Database
 gem 'pg'
+gem 'sqlite3'
 
 # User Management
 gem 'devise'
@@ -34,7 +35,6 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'less-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 
 group :development do
@@ -44,6 +44,7 @@ group :development do
   gem 'debugger'
   gem 'rails-footnotes'
   gem 'meta_request'
+  gem 'rubymine_heaven'
 end
 
 # Deploy with Capistrano

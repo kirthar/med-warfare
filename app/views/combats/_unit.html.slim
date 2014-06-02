@@ -3,12 +3,12 @@
     =' unit.name
     small lvl. #{unit.level}
   .row-fluid
-    .span6
+    .col-md-6
       .thumbnail
         = image_tag unit.default_image.standard.url
       small
         em= unit.description
-    .span6
+    .col-md-6
       div style='text-align: center;'
         span.bar-precentage #{unit.current_health}/#{unit.max_health}
         .progress

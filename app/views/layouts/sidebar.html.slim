@@ -5,9 +5,9 @@ html lang="en"
     = render 'layouts/shared/navbar'
     .container-fluid
       .row-fluid
-        .span3
+        .col-md-3
           = yield :sidebar
-        .span9
+        .col-md-9
           = bootstrap_flash
           = yield
 

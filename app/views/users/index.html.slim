@@ -16,11 +16,11 @@ table class="table table-striped"
           td= link_to user.id, user_path(user)
           td= user.username
           td= user.email
-          td.span2
+          td.col-md-2
             = link_to send_challange_user_path(id: user.id),  class: 'btn btn-warning btn-mini btn-block' do
               ' Send a challange
               i.icon-fire
-          td.span2
+          td.col-md-2
             - if friendship = Friendship.where(friend_id: user, user_id: current_user).first
               = link_to friendship, method: :delete, class: 'btn btn-danger btn-mini btn-block' do
                 ' Remove Friend

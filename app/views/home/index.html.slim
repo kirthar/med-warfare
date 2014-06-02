@@ -1,39 +1,43 @@
-.carousel.slide(id="myCarousel")
-  .carousel-inner
-    .item.active
-      = image_tag 'images/background_home.jpg'
-      .container
-        =' link_to 'Sign in', new_user_session_path, class: 'btn btn-small sign-in'
-        =' link_to raw('Sign in with <strong>Facebook</strong>'), user_omniauth_authorize_path(:facebook), class: 'btn btn-small btn-primary sign-in'
-        =' link_to raw('Sign in with <strong>Google</strong>'), user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-small btn-danger sign-in'
-        .carousel-caption
-          h1= APP_CONFIG['title']
-          p.lead Think, fight and command your units to the victory.
-          a.btn.btn-large.btn-danger(href=new_user_registration_path) Sign up now!
+/= image_tag 'images/background_home.jpg'
+.jumbotron.bg-image data-stellar-background-ratio="0.5"
+  .pull-right
+    =' link_to user_omniauth_authorize_path(:facebook), class: 'btn btn-facebook' do
+      i.fa.fa-facebook'
+      | | Connect with Facebook
+    =' link_to user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-google-plus' do
+      i.fa.fa-google-plus'
+      | | Connect with Google+
+    = link_to new_user_session_path, class: 'btn btn-success' do
+      i.fa.fa-user'
+      | | Sign in
+  h1= APP_CONFIG['title']
+  p Think, fight and command your units to the victory.
+  a.btn.btn-large.btn-danger(href=new_user_registration_path) Sign up now!
 
-.container.marketing
-  .row
-    .span4
+.container-fluid.marketing data-stellar-background-ratio="0.5"
+  .row-fluid
+    .col-md-4
       = image_tag 'images/spear.png'
       h2 Heading
       p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-      p
-        a.btn(href="#feature1") View details »
-    .span4
+      p= link_to 'View details »', '#feature1'
+
+    .col-md-4
       = image_tag 'images/shield_and_swords_home.png'
       h2 Heading
       p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-      p
-        a.btn(href="#feature2") View details »
-    .span4
+      p= link_to 'View details »', '#feature2'
+
+    .col-md-4
       = image_tag 'images/crossbow.gif'
       h2 Heading
       p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-      p
-        a.btn(href="#feature3") View details »
+      p= link_to 'View details »', '#feature3'
 
+.jumbotron.bg-image data-stellar-background-ratio="0.5"
+.container.marketing data-stellar-background-ratio="0.5"
   hr.featurette-divider
-  #feature1
+  #feature1 data-stellar-background-ratio="0.5"
   .featurette
     .featurette-image.pull-right
       = image_tag 'images/crossbow.gif'
@@ -41,8 +45,11 @@
       ' First featurette headling.
       span.muted It'll blow your mind.
     p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+
+.jumbotron.bg-image data-stellar-background-ratio="0.5"
+.container.marketing data-stellar-background-ratio="0.5"
   hr.featurette-divider
-  #feature2
+  #feature2 data-stellar-background-ratio="0.5"
   .featurette
     .featurette-image.pull-left
       = image_tag 'images/shield_and_swords_home.png'
@@ -50,8 +57,11 @@
       ' First featurette headling.
       span.muted It'll blow your mind.
     p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+
+.jumbotron.bg-image data-stellar-background-ratio="0.5"
+.container.marketing data-stellar-background-ratio="0.5"
   hr.featurette-divider
-  #feature3
+  #feature3 data-stellar-background-ratio="0.5"
   .featurette
     .featurette-image.pull-right
       = image_tag 'images/spear.png'

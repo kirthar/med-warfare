@@ -1,25 +1,26 @@
-= form_for  @unit, url: @unit.becomes(Unit), :html => { :class => "form-horizontal", :multipart => true } do |f|
+= form_for @unit, url: @unit.becomes(Unit), html: { class: "form-horizontal", multipart: true } do |f|
 
-  - klass = @unit.errors[:name].any? ? 'control-group error' : 'control-group'
-  div class=klass
-    = f.label :name, :class => 'control-label'
-    .controls
-      = f.text_field :name, :class => 'text_field'
-      .help-inline= @unit.errors[:name].first if @unit.errors[:name]
+  fieldset
+    - klass = @unit.errors[:name].any? ? 'form-group error' : 'form-group'
+    div class=klass
+      = f.label :name, :class => 'control-label'
+      .controls
+        = f.text_field :name, :class => 'form-control'
+        .help-inline= @unit.errors[:name].first if @unit.errors[:name]
 
-  .control-group
-    = f.label :image, :class => 'control-label'
-    .controls
-      = fields_for :unit_images do |ff|
-        = ff.file_field :image, :class => 'file_field'
-  .control-group
-    = f.label :description, :class => 'control-label'
-    .controls
-      = f.text_field :description, :class => 'text_field'
-  .control-group
-    = f.label :type, :class => 'control-label'
-    .controls
-      = select_tag :type_name, options_for_select(Unit::CLASSES, @unit.class.name.demodulize), :class => 'select_field'
+    .form-group
+      = f.label :image, :class => 'control-label'
+      .controls
+        = fields_for :unit_images do |ff|
+          = ff.file_field :image, :class => 'form-control'
+    .form-group
+      = f.label :description, :class => 'control-label'
+      .controls
+        = f.text_field :description, :class => 'form-control'
+    .form-group
+      = f.label :type, :class => 'control-label'
+      .controls
+        = select_tag :type_name, options_for_select(Unit::CLASSES, @unit.class.name.demodulize), :class => 'form-control'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '

@@ -2,11 +2,11 @@
   h1 Congratz #{@winner.username}!
   h2 You won the combat and this are your rewards
   h3 The rewards
-  ul.unstyled
+  ul.list-unstyled
     li #{@money_per_win} gold
     li #{@exp_per_win} XP
   h3 The heroes
-  ul.inline.unstyled
+  ul.inline.list-unstyled
     - @winner.units.each do |unit|
       li.box
         = image_tag unit.default_image.small.url if unit.default_image.present?

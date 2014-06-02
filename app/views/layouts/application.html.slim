@@ -4,9 +4,7 @@ html lang="en"
   body
     = render 'layouts/shared/navbar'
     .container-fluid
-      .row-fluid
-        .span12
-          = bootstrap_flash
-          = yield
-    
+      = bootstrap_flash
+      = yield
+
     = render 'layouts/shared/footer'

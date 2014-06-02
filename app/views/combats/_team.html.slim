@@ -1,5 +1,5 @@
 .team
-  .row-fluid
-    div id='mainwrapper'
-      - user.units.each do |unit|
+  #mainwrapper
+    - user.units.each do |unit|
+      .col-md-4
         = render 'units/thumb', unit: unit, challange: challange
